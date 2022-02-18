@@ -1,1 +1,31 @@
+#!/bin/bash
 
+#Script Name: Functions
+#Purpose:List the login of the computer's users
+#Example usage: To know who uses the computer
+#Expected output: list of names of user
+#Variable: people
+#Function: users 
+
+directories (){
+
+    read -a dir -p "Name 4 directories= "
+    mkdir ${dir[0]}
+    mkdir ${dir[1]}
+    mkdir ${dir[2]}
+    mkdir ${dir[3]}
+
+    echo ${dir[*]}
+}
+
+files (){
+
+    touch ${dir[0]}/summer.txt
+    touch ${dir[1]}/fall.txt
+    touch ${dir[2]}/winter.txt
+    touch ${dir[3]}/autum.txt
+
+}
+
+directories
+files
