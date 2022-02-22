@@ -7,14 +7,25 @@
 #Variable: yes, no
 #Function: 
 
-echo "would you like to see active processes?"
+task (){
+  
+    read -a option -p "would you like to see active processes? "
+    echo $(ps -aux)
+    echo ""
+    echo "Please do not delete something essential like kernel drivers"
+   
+   while [ true ]
+   do
+        echo "when finished teminating tasks just live blank and press return"
+        read -a PID -p "Select PID of the process you would you like to kill? "
+        kill ${PID}
+        
+        if [[ "${PID}" == "" ]]; then
+        break
+        fi
+    done
+echo "Have a good day"
 
-options='yes no'
+}
 
-select option in $options
-echo "Please do not delete something essential like kernel drivers"
-echo $(ps -aux)
-do
-
-    if [$no == "quit"]
- echo done
+task
