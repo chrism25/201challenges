@@ -1,1 +1,20 @@
+#! /bin/bash
 
+#Script Name: Loops
+#Purpose:to kill one or more of the running procesees
+#Example usage: To kill one or more of the unnecesary/harmufl tasks
+#Expected output: to kill procesees
+#Variable: yes, no
+#Function: 
+
+echo "would you like to see active processes?"
+
+options='yes no'
+
+select option in $options
+echo "Please do not delete something essential like kernel drivers"
+echo $(ps -aux)
+do
+
+    if [$no == "quit"]
+ echo done
