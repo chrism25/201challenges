@@ -1,1 +1,28 @@
+#!/bin/bash
+
+#Script Name: Conditionals
+#Purpose: To create a file if one is not present on the directory being checked
+#Example usage: To create a file on empty directories
+#Expected output: Creation of a file
+#Variable: 
+#Function: Count
+
+
+count () {
+	
+read -a file -p "enter the name of the file that you are looking for: "
+    
+    if [ -f $file ]; then
+    echo "Yes your file is here"
+    
+    else touch $file
+    echo "The file wasn't here but I got you"
+    echo "I just created it for you, it will be a litecoin please"
+    ls 
+
+fi 
+
+}
+
+count
 
