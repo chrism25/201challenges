@@ -1,0 +1,37 @@
+#! /bin/bash
+
+#Script Name: SI
+#Purpose: Provides the user with the hardware configuration of the computer
+#Example usage: When the computer's spec are needed in order to do an upgrade or for compatibility
+#Expected output: A list of the computer's hardware configuration
+
+name=$(sudo lshw | grep -m1 "")
+cpu=$(sudo lshw | grep -A 4 "Intel(R)")
+ram=$(sudo lshw | grep -A 2 "System memory")
+da=$(sudo lshw | grep -A 4 "compatible")
+da2=$(sudo lshw | grep -B 4 "irq:18")
+#Additionally da=$(sudo lshw | grep -A 10 "compatible" | sed -e "s/ version: 00//g") could have been used instead of
+# da & da2, but this would have leave a black line present
+na=$(sudo lshw | grep -B 14  "irq:19")
+# bios=$(sudo dmidecode | grep -i -A 14 "bios in")
+# sys=$(sudo dmidecode | grep -A 8 "System")
+
+echo "Name of the Computer: $name"
+echo
+echo CPU:
+echo "$cpu"
+echo
+echo Ram:
+echo "$ram"
+echo
+echo Display Adapter:
+echo "$da"
+echo "$da2"
+echo
+echo Network Adapter:
+echo "$na"
+echo
+# echo BIOS:
+# echo $bios       
+# echo System:
+# echo $sis
