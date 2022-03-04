@@ -1,0 +1,6 @@
+@echo off
+
+md backupfiles
+robocopy "C:\Users\j.thompson\Desktop\My Project Files" C:\Users\j.thompson\Documents\backupfiles
+
+exit
