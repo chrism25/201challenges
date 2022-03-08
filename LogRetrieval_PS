@@ -1,0 +1,20 @@
+#Script Name: logret
+#Purpose:List the login of the computer's users
+#Example usage: To know who uses the computer
+#Expected output: list of names of user
+#Variable: people
+#Function: users 
+
+#get-eventlog -LogName System -After (Get-Date).AddDays(-1) | Out-File -filepath C:\Users\chris\OneDrive\Desktop\last_24.txt
+#The "After (Get-Date).AddDays(-1)" is the parameter for last day / out-file creates the file and input the information
+#get-eventlog -LogName System -EntryType Error | Out-File -filepath C:\Users\chris\OneDrive\Desktop\errors.txt
+#it only looks for events that are errors
+Write-Output "`nEvents with ID 16 from the System log."
+Get-EventLog -LogName System -InstanceId 16
+#it only looks for events with ID 16
+Write-Output "`nRecent 20 event from the System log`n"
+Get-EventLog -LogName System -Newest 20
+#Get the latest 20 evetns in System
+Write-Output "`nRcent 500 events from System log, with complete source."
+Get-EventLog -LogName System -Newest 500 | group-object -property source -NoElement | Format-Wide
+#the information is group by source, extra details are eliminated and the info is presented in a wide format
