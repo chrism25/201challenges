@@ -1,4 +1,9 @@
-#@echo off
+#Script Name: AutomationPS
+#Purpose:To automate processes
+#Example usage: Set up for a new computer
+#Expected output: Computer customization
+#Variable: N/A
+#Function: N/A
 
 #Set-NetFirewallRule -displaygroup "file and printer sharing" -Enabled True
 #enables file and printer sharing rules
