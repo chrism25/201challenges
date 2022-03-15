@@ -27,6 +27,8 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-hyper-V-all
 #Enables Hyper-V
 Write-Output "Hyper-V has been enabled`n"
 
-set-smbserverconfiguration -EnableSMB1Protocol $false -Force
+Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
 #disables SMB 1.0
+#set-smbserverconfiguration -EnableSMB1Protocol $false -Force
+#another way to disable SMB
 Write-Output "SMB has been disabled"
