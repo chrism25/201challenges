@@ -2,22 +2,26 @@
 #Purpose:To get information about processes
 #Example usage: To determine information about a proceess
 #Expected output: list of processes and short PS commands
-#Variable: N/A
+#Variable: ID = process ID
 #Function: for loop
 
 Write-Output "`nActive processes by time consumption in descending order"
 Get-Process | sort-object cpu -Descending
 #gets processes sorted by descending cpu time consumption
+
 Write-Output "`nActive processes by ID in descending order`n"
 Get-Process | sort-object id -Descending
 #Gets processes sorted by descending ID order
+
 Write-Output "`nTop 5 active processes by WS in descending order`n"
 Get-Process | sort-object workingset -Descending | Select-Object -First 5
 #Gets the top 5 highest working set by descending order
+
 Write-Output "`nwould you like a website?`n"
 Start-Sleep -Seconds 3
 Start "iexplore.exe" "https://owasp.org/www-project-top-ten"
 #it opens the "*" website on internet explorer
+
 Write-Output "Fun right? Here is fun times 10 ;)`n"
 #Start-Sleep -Seconds 3
 foreach ($i in 1..10) {
@@ -25,11 +29,15 @@ start "iexplore.exe" "https://owasp.org/www-project-top-ten"
 }
 #opens a website for the parameter ".." on internet explorer
 Start-Sleep -Seconds 8
-write-output "Alright i'll take them with me"
+
+write-output "Alright i'll take them with me`n"
 Start-Sleep -Seconds 3
 get-process iexplore | stop-process
 stop-process -name "iexplore"
 #closes all internet explorer windows
-taskkill /f /PID 1956
-#kills a proccess by its ID
-Write-Output "By the way I took your notepad as well, hope nothing important was there ;)"
+
+Get-Process
+Write-Output "`nPlease be careful with your selection"
+$ID = read-host -Prompt "choose the ID of the process you would like to close"
+taskkill /f /PID $ID
+#asks the user for the process' ID and kills it
