@@ -1,0 +1,51 @@
+#Script Name: selectstring
+#Purpose: select information from an obtained source 
+#Example usage: To pinpoint excatly what is need it
+#Expected output: expecific information
+#Variable: file & choices
+#Function: main/stretch/choice
+
+$file = "network_report.txt"
+$choice = Read-Host "Do you want to see the 'main' task or the 'stretch'"
+
+function main {
+    ipconfig /all > "$file"
+    #gets the TCP/IP network configuration and places it on the "*" file
+    Write-Output "`nThe network_report.txt file has been created and TCP/IP information is inside`n"
+
+    Write-Output "Here is the IPv4"
+    Select-String -path "$file" -Pattern "IPv4"
+    #looks for the match "*" in the file and prints it out
+
+    rm "$file"
+    #removes the file "*"
+}
+
+function stretch {
+    ipconfig /all | Set-Clipboard
+    #gets the TCP/IP network configuration and places it on the memory
+
+    Write-Output "Here is the IPv4"
+    Get-Clipboard | Select-String -Pattern "IPv4"
+    #looks for the match "*" in the memory
+
+    Write-Output "Testing Network Adapter"
+    ping 127.0.0.1
+    #sends data to the LAN to see it it's working properly
+
+    Write-Output "Testing internet connectivity"
+    ping 8.8.8.8
+    #sends a request to an IP address to test connectivity
+}
+
+
+for ($choice = main)
+    {main
+    }
+if  ($choice = strech)
+    {stretch
+    }
+elseif
+    Write-Output "that's not a choice"
+    fi
+done
