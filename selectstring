@@ -2,30 +2,36 @@
 #Purpose: select information from an obtained source 
 #Example usage: To pinpoint excatly what is need it
 #Expected output: expecific information
-#Variable: file & choices
+#Variable: file & ip
 #Function: main/stretch/choice
 
 $file = "network_report.txt"
-$choice = Read-Host "Do you want to see the 'main' task or the 'stretch'"
+#$choice = Read-Host "Would you like to see the 'main' goal or the 'stretch' one"
+$ip = ipconfig /all | Select-String -Pattern "IPv4" | Out-String
 
 function main {
     ipconfig /all > "$file"
     #gets the TCP/IP network configuration and places it on the "*" file
     Write-Output "`nThe network_report.txt file has been created and TCP/IP information is inside`n"
 
-    Write-Output "Here is the IPv4"
-    Select-String -path "$file" -Pattern "IPv4"
-    #looks for the match "*" in the file and prints it out
+    Write-Output "Here is the IPv4`n"
+    ($ip | Select-String -Pattern "\d{1,3}(\.\d{1,3}){3}" -AllMatches).Matches.Value
+    #select the match "*", output it as a string, select the match with the pattern "*"
 
     rm "$file"
     #removes the file "*"
+    Write-Output "`nThe file has been deleted"
+#break
 }
+main
+
+Start-Sleep -Seconds 5
 
 function stretch {
     ipconfig /all | Set-Clipboard
     #gets the TCP/IP network configuration and places it on the memory
 
-    Write-Output "Here is the IPv4"
+    Write-Output "`nHere is the IPv4"
     Get-Clipboard | Select-String -Pattern "IPv4"
     #looks for the match "*" in the memory
 
@@ -36,16 +42,17 @@ function stretch {
     Write-Output "Testing internet connectivity"
     ping 8.8.8.8
     #sends a request to an IP address to test connectivity
+#break
 }
+stretch
 
+#if ($choice = main)
+#{    main
 
-for ($choice = main)
-    {main
-    }
-if  ($choice = strech)
-    {stretch
-    }
-elseif
-    Write-Output "that's not a choice"
-    fi
-done
+#elseif ($choice = stretch)
+#{    stretch
+#}
+
+#else { 
+#Write-Output "Please input given choices"
+#} 
