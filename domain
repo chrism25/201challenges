@@ -1,0 +1,35 @@
+#!/bin/bash
+
+#Script Name: Domain
+#Purpose: Provide user with all possible Domain Information
+#Example usage: Determine how safe a domain is
+#Expected output: A file with public information about a domain
+#Variable: Link
+#Function: fetch
+
+touch "domaininfo.txt"
+
+fetch (){
+
+    echo ""
+    echo "Here is some info about the website"
+    echo ""
+    whois $link
+    echo ""
+    echo "Here is the domain information"
+    dig $link
+    echo ""
+    echo "Here are the names and IP addresses"
+    echo ""
+    host $link
+    echo ""
+    echo "Here is some additonal information for the Domain"
+    echo ""
+    nslookup $link
+}
+
+read -a link -p "Please provide a domain name to give you some useful information: "
+
+fetch
+
+fetch > domaininfo.txt
