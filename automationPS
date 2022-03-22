@@ -1,0 +1,34 @@
+#Script Name: AutomationPS
+#Purpose:To automate processes
+#Example usage: Set up for a new computer
+#Expected output: Computer customization
+#Variable: N/A
+#Function: N/A
+
+Set-NetFirewallRule -displaygroup "file and printer sharing" -Enabled True
+#enables file and printer sharing rules
+Write-Output "file and printer sharing has been enabled`n"
+
+netsh advfirewall firewall add rule name="icmp traffic allow" protocol=icmpv4:8,any dir=in action=allow
+#creates a rule to allow ICMP traffic
+Write-Output "ICMP traffic is now allow`n"  
+
+enable-NetFirewallRule -DisplayGroup "remote desktop"
+#permits incoming request to RDP
+reg add "HKLM\SYSTEM\currentcontrolset\control\terminal server" /v fdenyTSConnections /t reg_dword /d 0 /f
+#creates the key that negates the RDP and gives it a value of 0, negating it
+Write-Output "RDP has been allowed`n"
+
+iex ((New-Object System.Net.WebClient).DownloadString('https://git.io/debloat'))
+#gets rid of unnecesary aps
+write-output "Bloatware has been removed`n"
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-hyper-V-all
+#Enables Hyper-V
+Write-Output "Hyper-V has been enabled`n"
+
+Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
+#disables SMB 1.0
+#set-smbserverconfiguration -EnableSMB1Protocol $false -Force
+#another way to disable SMB
+Write-Output "SMB has been disabled"
