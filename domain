@@ -7,8 +7,6 @@
 #Variable: Link
 #Function: fetch
 
-touch "domaininfo.txt"
-
 fetch (){
 
     echo ""
@@ -31,5 +29,9 @@ fetch (){
 read -a link -p "Please provide a domain name to give you some useful information: "
 
 fetch
-
 fetch > domaininfo.txt
+
+echo "Here is the file with your data"
+
+sleep 3
+nano domaininfo.txt
